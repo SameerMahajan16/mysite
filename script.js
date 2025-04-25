@@ -124,42 +124,6 @@ const wordList = [
     // Store guessed letter
     guessedLetters.push(guessedLetter);
   
-    // Check if guessed letter is in the selected word
-    if (selectedWord.includes(guessedLetter)) {
-      correctSound.play();
-      updateCorrectGuess(guessedLetter);
-    } else {
-      wrongSound.play();
-      updateWrongGuess(guessedLetter);
-    }
-  
-    inputField.value = ''; // Clear input field
-    document.getElementById('letterInput').focus(); // Refocus input field for next guess
-  }
-  
-  // Update the displayed word for correct guesses
-  function updateCorrectGuess(guessedLetter) {
-    let newDisplayedWord = '';
-  
-    for (let i = 0; i < selectedWord.length; i++) {
-      if (selectedWord[i] === guessedLetter) {
-        newDisplayedWord += guessedLetter; // Replace underscore with correct letter
-      } else {
-        newDisplayedWord += displayedWord[i]; // Keep existing correct letters
-      }
-    }
-  
-    displayedWord = newDisplayedWord;
-    updateUI();
-  
-    // Check if the player has guessed all letters
-    if (!displayedWord.includes('_')) {
-      endGame(true);
-    }
-  }
-  
-  // Handle wrong guesses
-  function updateWrongGuess(guessedLetter) {
     wrongGuesses++;
     lives--; // Decrease a life on wrong guess
     updateLives(); // Update life display
