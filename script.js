@@ -1,159 +1,49 @@
-// Word List
-const wordList = [
-    'gold',
-    'luck',
-    'clover',
-    'rain',
-    'charm',
-    'parade',
-    'leprechaun',
-    'treasure',
-    'celebration',
-    'greenery',
-    'shenanigans',
-    'tradition'
-  ];
-  
-  // Declare variables
-  let selectedWord = '';
-  let displayedWord = '';
-  let wrongGuesses = 0;
-  let guessedLetters = [];
-  const maxMistakes = 6;
-  let gameEnded = false;
-  let lives = 6; // Number of lives
-  let lifeElements = document.querySelectorAll('.life');
-  
-  // Sound effects
-  const correctSound = new Audio('correct.mp3');
-  const wrongSound = new Audio('wrong.mp3');
-  
-  // Start Game Function (runs everything)
-  function startGame(level) {
-    if (gameEnded) {
-      resetGame();
-    }
-  
-    // Reset game state
-    wrongGuesses = 0;
-    guessedLetters = [];
-    gameEnded = false;
-  
-    selectedWord = getRandomWord(level);
-    displayedWord = '_'.repeat(selectedWord.length);
-  
-    updateDifficultyDisplay(level);
-    updateUI();
-  
-    // Show Game Area and Difficulty Display, hide selection buttons
-    document.getElementById('gameArea').classList.remove('d-none');
-    document.getElementById('gameArea').classList.add('d-block');
-    document.getElementById('difficultyBox').classList.remove('d-none');
-    document.getElementById('difficultyBox').classList.add('d-block');
+// Global Variables
+const riddles = {
+    easy: [
+        { question: "What has keys but can't open locks?", answer: "piano" },
+        { question: "What has a head, a tail, but no body?", answer: "coin" },
+    ],
+    medium: [
+        { question: "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?", answer: "echo" },
+        { question: "The more of this there is, the less you see. What is it?", answer: "darkness" },
+    ],
+    hard: [
+        { question: "I’m tall when I’m young, and I’m short when I’m old. What am I?", answer: "candle" },
+        { question: "I can be cracked, I can be made, I can be told, I can be played. What am I?", answer: "joke" },
+    ]
+};
+
+let currentRiddle = null;
+let currentDifficulty = null;
+
+// Start the game with selected difficulty
+function startGame(level) {
+    currentDifficulty = level;
     document.getElementById('difficultySelection').classList.add('d-none');
-    document.getElementById('restartBtn').classList.remove('d-none');
-  
-    // Auto-focus on input
-    document.getElementById('letterInput').focus();
-  }
-  
-  // Get a random word based on difficulty
-  function getRandomWord(level) {
-    let filteredWords = wordList.filter(word => {
-      if (level === 'easy') return word.length <= 4;
-      if (level === 'medium') return word.length >= 5 && word.length <= 7;
-      if (level === 'hard') return word.length >= 8;
-    });
-    return filteredWords[Math.floor(Math.random() * filteredWords.length)];
-  }
-  
-  // Update Difficulty Display
-  function updateDifficultyDisplay(level) {
-    let difficultyBox = document.getElementById('difficultyBox');
-    difficultyBox.classList.remove('easy', 'medium', 'hard');
-  
-    if (level === 'easy') {
-      difficultyBox.textContent = 'Difficulty: Easy 🍀';
-      difficultyBox.classList.add('easy');
-    } else if (level === 'medium') {
-      difficultyBox.textContent = 'Difficulty: Medium 🌟';
-      difficultyBox.classList.add('medium');
-    } else if (level === 'hard') {
-      difficultyBox.textContent = 'Difficulty: Hard 💀';
-      difficultyBox.classList.add('hard');
+    document.getElementById('gameArea').classList.remove('d-none');
+    showRiddle(level);
+}
+
+// Display a random riddle based on difficulty
+function showRiddle() {
+    const riddleArray = riddles[currentDifficulty];
+    const randomIndex = Math.floor(Math.random() * riddleArray.length);
+    currentRiddle = riddleArray[randomIndex];
+    document.getElementById('riddleDisplay').textContent = currentRiddle.question;
+    document.getElementById('feedback').textContent = '';
+}
+
+// Check the user's answer
+function checkAnswer() {
+    const userAnswer = document.getElementById('answerInput').value.trim().toLowerCase();
+    const feedbackElement = document.getElementById('feedback');
+    if (userAnswer === currentRiddle.answer) {
+        feedbackElement.textContent = "Correct! 🎉";
+        feedbackElement.className = "mt-4 correct"; // Green color feedback
+    } else {
+        feedbackElement.textContent = "Oops! Try again. 😞";
+        feedbackElement.className = "mt-4 incorrect"; // Red color feedback
     }
-  }
-  
-  // Update the displayed word
-  function updateUI() {
-    document.getElementById('wordDisplay').textContent = displayedWord.split('').join('  ');
-    document.getElementById('wrongLetters').textContent = `Wrong Guesses: ${guessedLetters.filter(letter => !selectedWord.includes(letter)).join(', ')}`;
-    updateLives();
-  }
-  
-  // Update lives display
-  function updateLives() {
-    for (let i = 0; i < lifeElements.length; i++) {
-      if (i < lives) {
-        lifeElements[i].style.visibility = 'visible';
-      } else {
-        lifeElements[i].style.visibility = 'hidden';
-      }
-    }
-  }
-  
-  // Handle letter guess
-  function guessLetter() {
-    let inputField = document.getElementById('letterInput');
-    let guessedLetter = inputField.value.toLowerCase().trim();
-  
-    // Check if input is a valid letter (A-Z)
-    if (!guessedLetter.match(/^[a-z]$/)) {
-      alert('Please enter a valid letter (A-Z)!');
-      inputField.value = '';
-      return;
-    }
-  
-    // Check if letter was already guessed
-    if (guessedLetters.includes(guessedLetter)) {
-      alert(`You already guessed '${guessedLetter}'. Try a different letter!`);
-      inputField.value = '';
-      return;
-    }
-  
-    // Store guessed letter
-    guessedLetters.push(guessedLetter);
-  
-    wrongGuesses++;
-    lives--; // Decrease a life on wrong guess
-    updateLives(); // Update life display
-  
-    updateUI();
-  
-    if (lives === 0) {
-      endGame(false);
-    }
-  }
-  
-  // End Game Function
-  function endGame(won) {
-    gameEnded = true;
-    let message = won ? 'Congratulations! You guessed the word!' : `Game Over! The word was: ${selectedWord}`;
-    alert(message);
-    document.getElementById('restartBtn').classList.remove('d-none');
-  }
-  
-  // Restart the game without reloading the page
-  function restartGame() {
-    resetGame();
-    document.getElementById('difficultySelection').classList.remove('d-none');
-    document.getElementById('gameArea').classList.add('d-none');
-    document.getElementById('difficultyBox').classList.add('d-none');
-  }
-  
-  // Event listener for Enter key press to submit guess
-  document.getElementById('letterInput').addEventListener('keydown', function(event) {
-    if (event.key === 'Enter' && !gameEnded) { // Ensure the game hasn't ended
-      guessLetter(); // This will trigger the guessLetter function when Enter is pressed
-    }
-  });
+    document.getElementById('answerInput').value = ''; // Clear input field after submission
+}
