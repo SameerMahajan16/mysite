@@ -1,40 +1,96 @@
 body {
-    background: linear-gradient(to bottom right, #dbeafe, #f0f9ff);
-    min-height: 100vh;
-  }
-  
-  h1, h2, p {
-    font-size: 2rem;
-  }
-  
-  .btn-lg {
-    font-size: 1.5rem;
-  }
-  
-  input[type="text"] {
+    background-color: #1a1a1d;
+    color: #e0e0e0;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2 {
+    font-weight: bold;
+}
+
+.navbar {
+    background-color: #121212;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    color: #00bcd4 !important;
+}
+
+.nav-link {
+    color: #b0bec5 !important;
+}
+
+.nav-link:hover {
+    color: #00bcd4 !important;
+}
+
+header p {
     font-size: 1.2rem;
-    width: 50%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 8px;
-    border-radius: 10px;
-  }
-  
-  #lives {
-    font-size: 2rem;
-    color: red;
-  }
-  
-  #feedback {
-    font-size: 2rem;
-    margin-top: 20px;
-  }
-  
-  .correct {
-    background-color: rgba(0, 255, 0, 0.3);
-  }
-  
-  #levelIndicator {
+    color: #b0bec5;
+}
+
+.level-btn {
+    background-color: #333;
+    color: #00bcd4;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-bottom: 3px solid #00bcd4;
+    transition: all 0.3s ease;
+}
+
+.level-btn:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.submit-btn {
+    background-color: #00bcd4;
+    color: #1a1a1d;
+    padding: 10px 25px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #008c9e;
+    color: #fff;
+}
+
+.restart-btn {
+    background-color: red;
+    color: #fff;
+    padding: 10px 25px;
+    border: none;
+}
+
+.restart-btn:hover {
+    background-color: darkred;
+}
+
+#feedback {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+#feedback.correct {
+    color: #66ff66;
+}
+
+#feedback.incorrect {
+    color: #ff6666;
+}
+
+#lives {
     font-size: 1.5rem;
-  }
-  
+    margin: 10px;
+}
+
+#currentLevel {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 20px;
+}

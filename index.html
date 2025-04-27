@@ -2,31 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Riddle Game - Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riddle Quest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">Riddle Game</a>
-        <div class="collapse navbar-collapse">
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Riddle Quest</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <div class="container text-center mt-5">
-        <h1>Select Your Difficulty</h1>
-        <div class="mt-4">
-            <a href="easy.html" class="btn btn-success btn-lg m-2">Easy</a>
-            <a href="medium.html" class="btn btn-warning btn-lg m-2">Medium</a>
-            <a href="hard.html" class="btn btn-danger btn-lg m-2">Hard</a>
-        </div>
-    </div>
+    <header class="text-center mt-5">
+        <h1>Test Your Brain</h1>
+        <p>Select a level to start!</p>
+    </header>
+
+    <section class="text-center mt-4" id="difficultySelection">
+        <button class="btn level-btn" onclick="startGame('easy')">Easy</button>
+        <button class="btn level-btn" onclick="startGame('medium')">Medium</button>
+        <button class="btn level-btn" onclick="startGame('hard')">Hard</button>
+    </section>
+
+    <section id="gameArea" class="text-center mt-5" style="display:none;">
+        <h2 id="riddle"></h2>
+        <div id="lives"></div>
+        <input type="text" id="answerInput" class="form-control mt-3" placeholder="Type your answer here" onkeyup="checkEnter(event)">
+        <button class="btn submit-btn mt-2" onclick="submitAnswer()">Submit</button>
+        <button class="btn restart-btn mt-2" onclick="resetGame()">Reset</button>
+        <p id="feedback" class="mt-3"></p>
+        <p id="currentLevel" class="mt-3"></p>
+    </section>
 
     <script src="script.js"></script>
 </body>
