@@ -94,3 +94,8 @@ header p {
     font-weight: bold;
     margin-top: 20px;
 }
+
+#answerInput {
+    width: 80%; /* Smaller width for the input */
+    margin: 0 auto;
+}
