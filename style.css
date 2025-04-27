@@ -1,81 +1,40 @@
 body {
-    background-color: #1a1a1d;
-    color: #e0e0e0;
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2 {
-    font-weight: bold;
-}
-
-.navbar {
-    background-color: #121212;
-}
-
-.navbar-brand {
-    font-size: 1.8rem;
-    color: #00bcd4 !important;
-}
-
-.nav-link {
-    color: #b0bec5 !important;
-}
-
-.nav-link:hover {
-    color: #00bcd4 !important;
-}
-
-header p {
+    background: linear-gradient(to bottom right, #dbeafe, #f0f9ff);
+    min-height: 100vh;
+  }
+  
+  h1, h2, p {
+    font-size: 2rem;
+  }
+  
+  .btn-lg {
+    font-size: 1.5rem;
+  }
+  
+  input[type="text"] {
     font-size: 1.2rem;
-    color: #b0bec5;
-}
-
-.level-btn {
-    background-color: #333;
-    color: #00bcd4;
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-bottom: 3px solid #00bcd4;
-    transition: all 0.3s ease;
-}
-
-.level-btn:hover {
-    background-color: #444;
-    color: #fff;
-}
-
-.submit-btn {
-    background-color: #00bcd4;
-    color: #1a1a1d;
-    padding: 10px 25px;
-    border: none;
-    transition: background-color 0.3s;
-}
-
-.submit-btn:hover {
-    background-color: #008c9e;
-    color: #fff;
-}
-
-#feedback {
-    font-size: 1.4rem;
-    font-weight: bold;
-}
-
-#feedback.correct {
-    color: #66ff66;
-}
-
-#feedback.incorrect {
-    color: #ff6666;
-}
-
-/* When game is fully completed */
-#completedMessage {
-    font-size: 2.5rem;
-    color: #66ff66;
-    margin-top: 50px;
-}
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 8px;
+    border-radius: 10px;
+  }
+  
+  #lives {
+    font-size: 2rem;
+    color: red;
+  }
+  
+  #feedback {
+    font-size: 2rem;
+    margin-top: 20px;
+  }
+  
+  .correct {
+    background-color: rgba(0, 255, 0, 0.3);
+  }
+  
+  #levelIndicator {
+    font-size: 1.5rem;
+  }
+  

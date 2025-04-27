@@ -1,53 +1,71 @@
-let easyRiddles = [
-    { question: "What has keys but can't open locks?", answer: "piano" },
-    { question: "What has a head and a tail but no body?", answer: "coin" },
-    { question: "What gets wetter as it dries?", answer: "towel" }
-];
+const riddles = {
+    easy: [
+        { question: "What has keys but can't open locks?", answer: "piano" },
+        { question: "What has legs but doesn’t walk?", answer: "table" }
+    ],
+    medium: [
+        { question: "What comes once in a minute, twice in a moment, but never in a thousand years?", answer: "m" },
+        { question: "What can fill a room but takes up no space?", answer: "light" }
+    ],
+    hard: [
+        { question: "The more you take, the more you leave behind. What are they?", answer: "footsteps" },
+        { question: "I have cities but no houses, mountains but no trees, and water but no fish. What am I?", answer: "map" }
+    ]
+};
 
-let mediumRiddles = [
-    { question: "I speak without a mouth and hear without ears. What am I?", answer: "echo" },
-    { question: "The more you take, the more you leave behind. What are they?", answer: "footsteps" },
-    { question: "What has hands but can’t clap?", answer: "clock" }
-];
+let currentDifficulty = "";
+let currentRiddle = {};
+let lives = 3;
 
-let hardRiddles = [
-    { question: "What can run but never walks, has a bed but never sleeps?", answer: "river" },
-    { question: "The more you remove from me, the bigger I get. What am I?", answer: "hole" },
-    { question: "What disappears as soon as you say its name?", answer: "silence" }
-];
+function startGame(difficulty) {
+    currentDifficulty = difficulty;
+    document.getElementById("homeScreen").classList.add("d-none");
+    document.getElementById("gameScreen").classList.remove("d-none");
 
-let currentLevel = "";
-let currentRiddle = null;
+    document.getElementById("levelIndicator").innerText = "Level: " + difficulty.charAt(0).toUpperCase() + difficulty.slice(1);
 
-function startGame(level) {
-    currentLevel = level;
-    if (level === "easy") {
-        currentRiddle = easyRiddles[Math.floor(Math.random() * easyRiddles.length)];
-    } else if (level === "medium") {
-        currentRiddle = mediumRiddles[Math.floor(Math.random() * mediumRiddles.length)];
-    } else if (level === "hard") {
-        currentRiddle = hardRiddles[Math.floor(Math.random() * hardRiddles.length)];
-    }
-    document.getElementById("riddle").textContent = currentRiddle.question;
-    document.getElementById("feedback").textContent = "";
-    document.getElementById("answerInput").value = "";
+    const riddleArray = riddles[difficulty];
+    currentRiddle = riddleArray[Math.floor(Math.random() * riddleArray.length)];
+    document.getElementById("riddle").innerText = currentRiddle.question;
+    document.getElementById("lives").innerHTML = "❤️❤️❤️";
 }
 
-function submitAnswer() {
-    let userAnswer = document.getElementById("answerInput").value.toLowerCase().trim();
-    if (userAnswer === currentRiddle.answer) {
-        document.getElementById("feedback").textContent = "Correct! Moving to next level...";
-        document.getElementById("feedback").className = "correct";
-        if (currentLevel === "easy") {
-            startGame("medium");
-        } else if (currentLevel === "medium") {
-            startGame("hard");
-        } else {
-            document.getElementById("gameArea").innerHTML = "<div id='completedMessage'>Congratulations! You completed the Riddle Quest!</div>";
-        }
-        // Insert answer image here if you want later
+function checkAnswer() {
+    const input = document.getElementById("answerInput").value.trim().toLowerCase();
+    const feedback = document.getElementById("feedback");
+
+    if (!input) {
+        feedback.innerText = "You didn't enter an answer yet!";
+        return;
+    }
+
+    if (input === currentRiddle.answer) {
+        document.body.classList.add("correct");
+        feedback.innerHTML = "✅ Correct!";
+        setTimeout(() => {
+            location.reload();
+        }, 1500);
     } else {
-        document.getElementById("feedback").textContent = "Incorrect! Try again.";
-        document.getElementById("feedback").className = "incorrect";
+        lives--;
+        if (lives === 2) {
+            document.getElementById("lives").innerHTML = "❤️❤️";
+        } else if (lives === 1) {
+            document.getElementById("lives").innerHTML = "❤️";
+        } else {
+            feedback.innerText = "❌ You lost! Resetting...";
+            setTimeout(() => {
+                location.href = "index.html";
+            }, 1500);
+        }
     }
 }
+
+function resetGame() {
+    location.href = "index.html";
+}
+
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        checkAnswer();
+    }
+});
