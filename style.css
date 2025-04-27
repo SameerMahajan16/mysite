@@ -1,118 +1,81 @@
-/* Global Styles */
 body {
+    background-color: #1a1a1d;
+    color: #e0e0e0;
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(45deg, #ff8c00, #ff6347);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
-h1 {
-    font-size: 3.5rem;
+h1, h2 {
     font-weight: bold;
-    color: #ffffff;
-    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Navbar */
 .navbar {
-    background-color: #343a40 !important;
+    background-color: #121212;
 }
 
 .navbar-brand {
-    font-size: 2rem;
-    color: #ffeb3b !important;
+    font-size: 1.8rem;
+    color: #00bcd4 !important;
 }
 
-.navbar-nav .nav-link {
+.nav-link {
+    color: #b0bec5 !important;
+}
+
+.nav-link:hover {
+    color: #00bcd4 !important;
+}
+
+header p {
     font-size: 1.2rem;
-    color: #ffffff !important;
+    color: #b0bec5;
 }
 
-.navbar-nav .nav-link:hover {
-    color: #ffeb3b !important;
-}
-
-/* Difficulty Buttons */
-.difficulty-btn {
-    font-size: 1.2rem;
-    padding: 15px 40px;
-    border-radius: 20px;
+.level-btn {
+    background-color: #333;
+    color: #00bcd4;
+    padding: 10px 20px;
+    margin: 10px;
     border: none;
+    border-bottom: 3px solid #00bcd4;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.difficulty-btn:hover {
-    transform: scale(1.1);
-}
-
-.difficulty-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.5);
-}
-
-/* Game Area */
-#gameArea {
-    margin-top: 30px;
-}
-
-input[type="text"] {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 10px;
-    font-size: 1.2rem;
-}
-
-button {
-    font-size: 1.1rem;
-    padding: 12px 30px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #32cd32;
-    cursor: pointer;
-}
-
-/* Feedback */
-#feedback {
-    font-size: 1.5rem;
-    font-weight: bold;
+.level-btn:hover {
+    background-color: #444;
     color: #fff;
 }
 
+.submit-btn {
+    background-color: #00bcd4;
+    color: #1a1a1d;
+    padding: 10px 25px;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+    background-color: #008c9e;
+    color: #fff;
+}
+
+#feedback {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
 #feedback.correct {
-    color: #32cd32; /* Green */
+    color: #66ff66;
 }
 
 #feedback.incorrect {
-    color: #ff6347; /* Red */
+    color: #ff6666;
 }
 
-/* Footer */
-footer {
-    background-color: #343a40;
-    color: #ffffff;
-    font-size: 1rem;
+/* When game is fully completed */
+#completedMessage {
+    font-size: 2.5rem;
+    color: #66ff66;
+    margin-top: 50px;
 }
-
-footer p {
-    margin: 0;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-    .difficulty-btn {
-        font-size: 1rem;
-        padding: 10px 25px;
-    }
-}
-make it less bight and more simpler and make the nav at the top and change the buttons and the way they look compleatly and change the text to a more suttle vibe not to exagerated also chang the riddle to have a list of riddels uses array and make themm change everytime so its different every time and can be played multpule tims also dont write any comment and also when i get the anwser right or wrong tell me that i did and tell me when to inset the image of the anwser uesing a comment  dont do too many diffent riddes just do like 3 or 4 for each level and make sure that if i get on anwser from that level right move me to the next level and if  pass th hardest level make it say that i compleated that game in big font with a light green tint on screen
